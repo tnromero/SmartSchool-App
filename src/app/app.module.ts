@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -27,7 +28,8 @@ import { TituloComponent } from './titulo/titulo.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
