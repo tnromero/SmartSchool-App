@@ -8,15 +8,17 @@ import { ProfessoresComponent } from './Professores/Professores.component';
 import { PerfilComponent } from './Perfil/Perfil.component';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { NavComponent } from './nav/nav.component';
+import { TituloComponent } from './titulo/titulo.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     AlunosComponent,
     ProfessoresComponent,
     PerfilComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+      TituloComponent
    ],
   imports: [
     BrowserModule,
