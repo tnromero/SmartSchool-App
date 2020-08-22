@@ -53,9 +53,11 @@
           <td>{{aluno.telefone}}</td>
           <td>
             <div class="btn-group">
-              
               <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Professores</button>
-              <button class="btn btn-sm btn-outline-danger">Desativar</button>
+              <button class="btn btn-sm btn-outline-danger" 
+                    (click)="excluirAluno(aluno.id)">
+                Excluir
+              </button>
             </div>
           </td>
         </tr>

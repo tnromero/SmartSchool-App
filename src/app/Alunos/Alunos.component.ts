@@ -93,5 +93,19 @@ export class AlunosComponent implements OnInit {
     this.alunoSelecionado = null;
   }
 
+  excluirAluno(id: number) {
+    this.alunoService.delete(id).subscribe(
+      (model: any) => {
+        console.log(model);
+        this.carregarAlunos();
+        if (id === this.alunoSelecionado.id) {
+          this.voltar();
+        }
+      },
+      (erro: any) => {
+        console.error(erro);
+      }
+    );
+  }
 
 }
