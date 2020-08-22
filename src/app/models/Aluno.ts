@@ -3,4 +3,11 @@ export class Aluno {
     nome: string;
     sobrenome: string;
     telefone: number;
+
+    constructor() {
+        this.id = 0;
+        this.nome = '';
+        this.sobrenome = '';
+        this.telefone = 0;
+    }
 }

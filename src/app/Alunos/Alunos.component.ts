@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Aluno } from '../models/aluno';
+import { AlunoService } from '../services/aluno.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -15,45 +16,77 @@ export class AlunosComponent implements OnInit {
   public titulo = 'Alunos';
   public alunoSelecionado: Aluno;
   public textoSimples: string;
+  public modo = 'post';
 
-  public alunos = [
-    { id: 1, nome: 'Thiago', sobrenome: 'Romero', telefone: 32547894},
-    { id: 2, nome: 'Joana', sobrenome: 'Maria', telefone: 78547894},
-    { id: 3, nome: 'Maria', sobrenome: 'Antonia', telefone: 32997894},
-    { id: 4, nome: 'Gabriel', sobrenome: 'Jose', telefone: 32546894},
-    { id: 5, nome: 'Kelly', sobrenome: 'Priscila', telefone: 32666894},
-    { id: 6, nome: 'Mari', sobrenome: 'Lo', telefone: 32547884},
-    { id: 7, nome: 'Amanda', sobrenome: 'Joquina', telefone: 31147894}
-  ];
+  public alunos: Aluno[];
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
   constructor(private fb: FormBuilder,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private alunoService: AlunoService) {
     this.criarForm();
    }
 
   ngOnInit() {
+    this.carregarAlunos();
+  }
 
+  carregarAlunos() {
+    this.alunoService.getAll().subscribe(
+      (alunos: Aluno[]) => {
+        this.alunos = alunos;
+      },
+      (erro: any) => {
+        console.error(erro);
+      }
+    );
   }
 
   criarForm() {
     this.alunoForm = this.fb.group({
+      id: [''],
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
       telefone: ['', Validators.required]
     });
   }
 
+  salvarAluno(aluno: Aluno) {
+    if (aluno.id === 0) {
+      this.modo = 'post';
+    }
+    else {
+      this.modo = 'put';
+    }
+
+    this.alunoService[this.modo](aluno).subscribe(
+      (a: Aluno) => {
+        console.log(a);
+        this.carregarAlunos();
+        this.voltar();
+      },
+      (erro: any) => {
+        console.log(erro);
+      }
+    );
+  }
+
   alunoSubmit() {
-    console.log(this.alunoForm.value);
+    this.salvarAluno(this.alunoForm.value);
+    //console.log(this.alunoForm.value);
   }
 
   selecionaAluno(aluno: Aluno) {
     this.alunoSelecionado = aluno;
     this.alunoForm.patchValue(aluno);
+  }
+
+  alunoNovo() {
+    this.alunoSelecionado = new Aluno();
+    this.alunoForm.patchValue(this.alunoSelecionado);
   }
 
   voltar() {
