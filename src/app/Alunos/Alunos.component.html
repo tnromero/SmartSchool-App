@@ -8,7 +8,7 @@
         <app-titulo [titulo]="'Cód. Aluno: '+alunoSelecionado.id"></app-titulo>
       </div>
       <div class="mt-2">
-        <button class="btn btn-outline-danger" (click)="voltar()">Fechar</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">Fechar</button>
       </div>
     </div>
    
@@ -28,7 +28,7 @@
       </div>
       <div class="form-group">
         <hr>
-        <button class="btn btn-success" [disabled]="!alunoForm.valid">Enviar</button>
+        <button class="btn btn-sm btn-success" [disabled]="!alunoForm.valid">Enviar</button>
       </div>
     </form>
   
@@ -40,21 +40,44 @@
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
+          <th scope="col">Visualizar</th>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
           <th scope="col">Sobrenome</th>
           <th scope="col">Telefone</th>
+          <th scope="col">Opções</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let aluno of alunos" style="cursor: pointer;" (click)="selecionaAluno(aluno)" >
-          <th scope="row">{{aluno.id}}</th>
+        <tr *ngFor="let aluno of alunos"  >
+          <td><button (click)="selecionaAluno(aluno)" class="text-dark btn btn-sm btn-outline-warning">Detalhe</button></td>
+          <td scope="row">{{aluno.id}}</td>
           <td>{{aluno.nome}}</td>
           <td>{{aluno.sobrenome}}</td>
           <td>{{aluno.telefone}}</td>
+          <td>
+            <div class="btn-group">
+              
+              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Professores</button>
+              <button class="btn btn-sm btn-outline-danger">Desativar</button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 
 </div>
+
+ 
+<ng-template #template>
+  <div class="modal-body">
+    <app-Professores></app-Professores>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-right" 
+            aria-label="Close" (click)="modalRef.hide()">
+      [FECHAR]
+    </button>
+  </div>
+</ng-template>
