@@ -1,7 +1,7 @@
 # SmartSchoolApp
 
 Projeto de Estudos sobre Angular e .Net Core do ProgrAmada Mente
-Link do Curso: https://www.youtube.com/watch?v=4k8aCkFpHk0 https://www.youtube.com/watch?v=IpZDGlpiFSM
+Link do Curso: https://www.youtube.com/watch?v=4k8aCkFpHk0
 
 [Angular CLI](https://github.com/angular/angular-cli) version 10.0.7.
 
